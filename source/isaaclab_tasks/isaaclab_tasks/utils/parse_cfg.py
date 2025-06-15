@@ -6,13 +6,13 @@
 """Sub-module with utilities for parsing and loading configurations."""
 
 
-import gymnasium as gym
 import importlib
 import inspect
 import os
 import re
-import yaml
 
+import gymnasium as gym
+import yaml
 from isaaclab.envs import DirectRLEnvCfg, ManagerBasedRLEnvCfg
 
 
@@ -184,7 +184,7 @@ def get_checkpoint_path(
             run_path = runs[-1]
     except IndexError:
         raise ValueError(f"No runs present in the directory: '{log_path}' match: '{run_dir}'.")
-
+    run_path = os.path.join(run_path, "models")  
     # list all model checkpoints in the directory
     model_checkpoints = [f for f in os.listdir(run_path) if re.match(checkpoint, f)]
     # check if any checkpoints are present
